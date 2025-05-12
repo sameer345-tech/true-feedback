@@ -13,7 +13,7 @@ import  CredentialsProvider  from "next-auth/providers/credentials";
             email: { label: "Email", type: "text", placeholder: "Enter your email" },
             password: { label: "Password", type: "password" }
             },
-          async  authorize (credentials: any): Promise<any> {
+          async  authorize (credentials: Record<"email" | "password", string> | undefined): Promise<any> {
             try {
                 if(!credentials?.email.trim() || !credentials?.password) {
                     throw new Error("Credentials are required")
@@ -56,8 +56,11 @@ import  CredentialsProvider  from "next-auth/providers/credentials";
               }
               return user;
                 
-            } catch (error: any) {
-                throw new Error(error)
+            } catch (error: unknown) {
+                if(error instanceof Error) {
+                    throw new Error(error.message)
+                }
+                throw new Error(error as string)
             }
           }
         })

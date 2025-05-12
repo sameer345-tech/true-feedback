@@ -77,11 +77,13 @@ export async function POST(req: NextRequest) {
       message: "Verification completed successfully",
       statusCode: 200,
     });
-  } catch (error: any) {
-    return NextResponse.json({
+  } catch (error: unknown) {
+    if(error instanceof Error) {
+      return NextResponse.json({
       success: false,
       message: `Email verification failed. Error: ${error.message}`,
       statusCode: 500
     });
+    }
   }
 }

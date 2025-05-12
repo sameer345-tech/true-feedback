@@ -1,7 +1,7 @@
 import { userModel } from "@/models/user";
 import { dbConnection } from "@/lib/dbConnection";
 import { userNameValidation } from "@/schemas/signupSchema";
-import { z } from "zod";
+import { unknown, z } from "zod";
 import { NextRequest, NextResponse } from "next/server";
 
 const userNameQuerySchema = z.object({
@@ -45,12 +45,14 @@ export async function GET(req:NextRequest) {
         statusCode: 200
     })
 
-    } catch (error: any) {
-        console.log(error);
-        return NextResponse.json({
-            success: false,
-            message: `Error during checking userName unique: ${error.message}`,
-            statusCode: 500
-        })
+    } catch (error: unknown) {
+        if(error instanceof Error) {
+            return NextResponse.json({
+                success: false,
+                message: error.message || "Internal server error",
+                statusCode: 500
+            })
+        }
     }
 }
+

@@ -47,11 +47,13 @@ export async function POST(req: NextRequest) {
       message: "Message sent successfully.",
       statusCode: 200,
     });
-  } catch (error: any) {
-    return NextResponse.json({
-      success: false,
-      message: `Error during creating message: ${error.message}`,
-      statusCode: 500,
-    });
+  } catch (error: unknown) {
+    if(error instanceof Error) {
+      return NextResponse.json({
+        success: false,
+        message: error.message || "Internal server error",
+        statusCode: 500,
+      });
+    }
   }
 }

@@ -28,12 +28,14 @@ export async function POST() {
       statusCode: 200,
     });
 
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('OpenAI API Error:', error);
+    if(error instanceof Error) {
     return NextResponse.json({
       success: false,
       message: error?.message || 'Something went wrong',
       statusCode: 500,
     });
+    }
   }
 }

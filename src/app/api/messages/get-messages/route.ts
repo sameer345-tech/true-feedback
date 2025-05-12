@@ -1,9 +1,9 @@
 import { getServerSession } from "next-auth";
 import { userModel } from "@/models/user";
 import { dbConnection } from "@/lib/dbConnection";
-import { NextRequest, NextResponse } from "next/server";
 import { authOptions } from "../../auth/[...nextauth]/options";
 import mongoose from "mongoose";
+import { NextResponse } from "next/server";
 
 export async function GET() {
     const session = await getServerSession(authOptions);
@@ -59,11 +59,13 @@ export async function GET() {
             messages:  messages[0].messages[0],
             statusCode: 200,
         });
-    } catch (error: any) {
+    } catch (error: unknown) {
+       if(error instanceof Error) {
         return NextResponse.json({
             success: false,
             message: `Error during retrieving messages: ${error.message}`,
             statusCode: 500,
         });
+       }
     }
  }

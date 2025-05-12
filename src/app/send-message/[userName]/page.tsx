@@ -24,6 +24,12 @@ import { ApiResponse } from '@/types/ApiResponse'
 function SendMessagePage() {
     const [isSubmiting, setIsSubmitting] = React.useState<boolean>(false);
     const {userName} = useParams();
+    const form = useForm<z.infer <typeof messageSchema>>({
+    resolver: zodResolver(messageSchema),
+    defaultValues: {
+      content: ""
+    }
+  });
    if(!userName) {
     toast("User name is required.", {
       position: "top-right"
@@ -33,12 +39,7 @@ function SendMessagePage() {
     const decodedUserName =  decodeURIComponent(userName.toString())
      const DecodedUserName = decodedUserName.replace("userName:", "").trim()
 
-   const form = useForm<z.infer <typeof messageSchema>>({
-    resolver: zodResolver(messageSchema),
-    defaultValues: {
-      content: ""
-    }
-  })
+   
 
   const {reset} = form;
   const onSubmit = async(data: z.infer <typeof messageSchema>) => {
