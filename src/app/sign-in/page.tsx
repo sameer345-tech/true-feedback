@@ -8,7 +8,7 @@ import { Loader2, Mail, Lock, ArrowRight } from 'lucide-react'
 import { zodResolver } from '@hookform/resolvers/zod'
 import z from "zod"
 import { toast } from 'sonner'
-import axios, { AxiosError } from 'axios'
+import  { AxiosError } from 'axios'
 import { ApiResponse } from '@/types/ApiResponse'
 import { signIn } from 'next-auth/react'
 import { motion } from "framer-motion";
@@ -17,7 +17,7 @@ import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
 
-function page() {
+function SignInPage() {
   const [isSignin, setIsSignin] = useState<boolean>(false)
   const router = useRouter()
   const form = useForm<z.infer<typeof signinSchema>>({
@@ -78,7 +78,7 @@ function page() {
           </p>
           <div className="bg-white/10 p-6 rounded-xl backdrop-blur-sm">
             <blockquote className="italic text-white/90">
-              "Mystery App has transformed how our team communicates. The anonymous feedback feature has led to more honest conversations and better outcomes."
+              True Feedback App has transformed how our team communicates. The anonymous feedback feature has led to more honest conversations and better outcomes.
             </blockquote>
             <div className="mt-4 flex items-center">
               <div className="h-10 w-10 rounded-full bg-white/20 flex items-center justify-center">
@@ -185,4 +185,4 @@ function page() {
   )
 }
 
-export default page
+export default SignInPage

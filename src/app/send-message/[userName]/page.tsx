@@ -21,7 +21,7 @@ import { toast } from 'sonner'
 import axios, { AxiosError } from 'axios'
 import { ApiResponse } from '@/types/ApiResponse'
 
-function page() {
+function SendMessagePage() {
     const [isSubmiting, setIsSubmitting] = React.useState<boolean>(false);
     const {userName} = useParams();
    if(!userName) {
@@ -127,4 +127,4 @@ function page() {
   )
 }
 
-export default page
+export default SendMessagePage

@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation";
 import { useSession, signOut } from "next-auth/react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
-import { Menu, X, User, LogOut, MessageSquare, Home, PlusCircle, List } from "lucide-react";
+import { Menu, X, User, LogOut, Home} from "lucide-react";
 
 const NavBar = () => {
   const { data: session } = useSession();
@@ -42,8 +42,7 @@ const NavBar = () => {
   const navLinks = session ? [
     { href: "/", label: "Home", icon: <Home className="w-4 h-4" /> },
     { href: "/dashboard", label: "Dashboard", icon: <User className="w-4 h-4" /> },
-    { href: "/create-message", label: "Create Message", icon: <PlusCircle className="w-4 h-4" /> },
-    { href: "/view-messages", label: "View Messages", icon: <MessageSquare className="w-4 h-4" /> },
+
   ] : [
     { href: "/", label: "Home", icon: <Home className="w-4 h-4" /> },
   ];

@@ -14,7 +14,7 @@ import { ApiResponse } from '@/types/ApiResponse';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
-function page() {
+function VerificationPage() {
     const { userName} = useParams();
     const [isVerifying, setIsVerifying] = useState<boolean>(false);
     const router = useRouter();
@@ -110,4 +110,4 @@ function page() {
 }
 
 
-export default page
+export default VerificationPage

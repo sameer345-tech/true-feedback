@@ -2,11 +2,8 @@ import { sendEmailVerification } from "@/helper/sendEmailverificaton";
 import { dbConnection } from "@/lib/dbConnection";
 import { userModel } from "@/models/user";
 import bcrypt from "bcryptjs";
-import NextAuth from "next-auth";
 import { NextAuthOptions } from "next-auth";
 import  CredentialsProvider  from "next-auth/providers/credentials";
-import { ApiError } from "next/dist/server/api-utils";
-import { NextResponse } from "next/server";
 
  export const authOptions : NextAuthOptions = {
     providers: [

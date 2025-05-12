@@ -3,10 +3,9 @@ import { userModel } from "@/models/user";
 import { dbConnection } from "@/lib/dbConnection";
 import { NextRequest, NextResponse } from "next/server";
 import { authOptions } from "../../auth/[...nextauth]/options";
-import { messageI } from "@/models/message";
 import mongoose from "mongoose";
 
-export async function GET(req: NextRequest) {
+export async function GET() {
     const session = await getServerSession(authOptions);
     if (!session || !session.user) {
         return NextResponse.json({

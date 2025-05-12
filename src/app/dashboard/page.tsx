@@ -1,7 +1,7 @@
 "use client"
 import React, { useCallback, useEffect, useState } from 'react'
-import { messageI, messageModel } from '@/models/message'
-import { boolean, z } from 'zod';
+import { messageI } from '@/models/message'
+import { z } from 'zod';
 import mongoose from 'mongoose';
 import { useSession } from 'next-auth/react';
 import { useForm } from 'react-hook-form';
@@ -9,17 +9,15 @@ import axios, { AxiosError } from 'axios';
 import { ApiResponse } from '@/types/ApiResponse';
 import { toast } from 'sonner';
 import { acceptMessageSchema } from '@/schemas/acceptMsgSchema';
-import { Resolver } from 'dns';
 import { zodResolver } from '@hookform/resolvers/zod';
 import Link from 'next/link';
 import { User } from 'next-auth';
 import CustomCard from '@/components/CustomCard';
 import { Button } from '@/components/ui/button';
-import { Separator } from '@/components/ui/separator';
 import { Switch } from '@/components/ui/switch';
 import { Loader2, RefreshCcw } from 'lucide-react';
 import { useRouter } from 'next/navigation';
-function Dashboard() {
+function DashboardPage() {
   const [messages, setMessages] = useState<messageI[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isSwitch, setIsSwitch] = useState<boolean>(false);
@@ -264,4 +262,4 @@ function Dashboard() {
   );
 }
 
-export default Dashboard
+export default DashboardPage

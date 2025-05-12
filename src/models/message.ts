@@ -1,10 +1,11 @@
-import mongoose, {Schema, Document} from "mongoose";
+import mongoose, {Schema} from "mongoose";
 
 
 export interface messageI  {
-  _id:  mongoose.Types.ObjectId,
+  _id?:  mongoose.Types.ObjectId,
    content: string,
    createdAt: Date,
+   
 };
 
  export const messageSchema : Schema <messageI> = new Schema({

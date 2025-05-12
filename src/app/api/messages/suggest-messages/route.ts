@@ -1,7 +1,6 @@
 import { groq } from '@ai-sdk/groq';
 import { streamText } from 'ai';
 
-import OpenAI from 'openai';
 import { NextResponse } from 'next/server';
 
 // const openai = new OpenAI({
@@ -10,7 +9,7 @@ import { NextResponse } from 'next/server';
 
 export const runtime = 'edge';
 
-export async function POST(req: Request) {
+export async function POST() {
   try {
     const prompt = "Create a list of three open-ended and engaging questions formatted as a single string. Each question should be separated by '||'. These questions are for an anonymous social messaging platform, like Qooh.me, and should be suitable for a diverse audience. Avoid personal or sensitive topics, focusing instead on universal themes that encourage friendly interaction.";
 

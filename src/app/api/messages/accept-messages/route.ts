@@ -3,7 +3,6 @@ import { userModel } from "@/models/user";
 import { dbConnection } from "@/lib/dbConnection";
 import { NextRequest, NextResponse } from "next/server";
 import { authOptions } from "../../auth/[...nextauth]/options";
-import jwt from "jsonwebtoken"
 
 export async function POST(req: NextRequest) {
   const session =  await getServerSession(authOptions);
@@ -51,7 +50,7 @@ export async function POST(req: NextRequest) {
   }
 }
 
-export async function GET(req: NextRequest) {
+export async function GET() {
   
   const session = await getServerSession(authOptions);
   if (!session || !session.user) {

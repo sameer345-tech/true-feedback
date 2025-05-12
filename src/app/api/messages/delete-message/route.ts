@@ -1,10 +1,9 @@
 import { dbConnection } from "@/lib/dbConnection";
-import { messageModel } from "@/models/message";
-import mongoose, { isValidObjectId } from "mongoose";
 import { NextRequest, NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../../auth/[...nextauth]/options";
 import { userModel } from "@/models/user";
+import { isValidObjectId } from "mongoose";
 
 
 export async function DELETE (req: NextRequest) {

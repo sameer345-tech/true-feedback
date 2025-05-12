@@ -1,12 +1,8 @@
-import { getServerSession } from "next-auth";
-import { messageModel } from "@/models/message";
 import { dbConnection } from "@/lib/dbConnection";
 import { NextRequest, NextResponse } from "next/server";
-import { authOptions } from "../../auth/[...nextauth]/options";
 import { messageSchema } from "@/schemas/messageSchema";
 import { userModel } from "@/models/user";
 import { messageI } from "@/models/message";
-import mongoose from "mongoose";
 export async function POST(req: NextRequest) {
   const { username, content } = await req.json();
   await dbConnection();

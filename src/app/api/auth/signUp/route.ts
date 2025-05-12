@@ -1,6 +1,5 @@
 import { dbConnection } from "@/lib/dbConnection";
 import { userModel } from "@/models/user";
-import mongoose from "mongoose";
 import { NextRequest, NextResponse } from "next/server";
 import { sendEmailVerification } from "@/helper/sendEmailverificaton";
 

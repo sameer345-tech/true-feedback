@@ -18,7 +18,7 @@ import { Button } from "@/components/ui/button"
 import { Loader2, User, Mail, Lock, CheckCircle, AlertCircle } from "lucide-react"
 import Link from "next/link"
 
-function page() {
+function SignUpPage() {
   const [userName, setUserName] = useState("");
   const [userNameMessage, setUserNameMessage] = useState("");
   const [validatingUserName, setValidatingUserName] = useState(false);
@@ -280,4 +280,4 @@ function page() {
   );
 }
 
-export default page
+export default SignUpPage

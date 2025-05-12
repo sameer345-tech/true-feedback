@@ -111,9 +111,9 @@ function Home() {
                             <Mail className="h-5 w-5 text-indigo-600" />
                           </div>
                           <div>
-                            <p className="text-gray-700 italic">"{message.content}"</p>
+                            <p className="text-gray-700 italic">{message.content}</p>
                             <p className="text-xs text-gray-500 mt-2">
-                              Received {message.received}
+                              Received {message.received.toString()}
                             </p>
                           </div>
                         </div>

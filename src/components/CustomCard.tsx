@@ -4,9 +4,6 @@ import {
   Card,
   CardContent,
   CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
 } from "@/components/ui/card";
 import { messageI,  } from '@/models/message';
 import {

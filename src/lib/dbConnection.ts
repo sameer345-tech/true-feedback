@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 // Connection object to track state
-let connection = {
+const connection = {
   isConnected: 0 as number | undefined,
   promise: null as Promise<typeof mongoose> | null,
 };
