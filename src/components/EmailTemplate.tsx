@@ -9,11 +9,11 @@ import {
     Text,
   } from '@react-email/components';
   interface VerificationEmailProps {
-    email: string,
     userName: string;
     otp: string;
+    email?: string; // Make email optional since it's not used
   }
-  
+
   export default function EmailTemplate({ userName, otp }: VerificationEmailProps) {
     return (
       <Html lang="en" dir="ltr">
@@ -42,7 +42,7 @@ import {
             </Text>
           </Row>
           <Row>
-            <Text>{otp}</Text> 
+            <Text>{otp}</Text>
           </Row>
           <Row>
             <Text>

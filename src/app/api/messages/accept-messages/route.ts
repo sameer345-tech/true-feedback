@@ -22,7 +22,7 @@ export async function POST(req: NextRequest) {
       {
        $set: {
         isMessageAccepted: isMessageAccepted,
-        
+
        },
       },
 
@@ -41,17 +41,18 @@ export async function POST(req: NextRequest) {
       message: updatedMessageAccepted.isMessageAccepted ? "Message accepted successfully" : "Message rejected successfully",
       statusCode: 200,
     });
-  } catch (error: any) {
+  } catch (error: unknown) {
+    const errorMessage = error instanceof Error ? error.message : "Unknown error";
     return NextResponse.json({
       success: false,
-      message: `Error during accepting message: ${error.message}`,
+      message: `Error during accepting message: ${errorMessage}`,
       statusCode: 500,
     });
   }
 }
 
 export async function GET() {
-  
+
   const session = await getServerSession(authOptions);
   if (!session || !session.user) {
     return NextResponse.json({
@@ -77,10 +78,11 @@ export async function GET() {
       isMessageAccepted: user?.isMessageAccepted,
       statusCode: 200,
     });
-  } catch (error: any) {
+  } catch (error: unknown) {
+    const errorMessage = error instanceof Error ? error.message : "Unknown error";
     return NextResponse.json({
       success: false,
-      message: `Error during retrieving message acceptence status: ${error.message}`,
+      message: `Error during retrieving message acceptence status: ${errorMessage}`,
       statusCode: 500,
     });
   }

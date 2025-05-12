@@ -48,11 +48,11 @@ const NavBar = () => {
   ];
 
   return (
-    <nav 
+    <nav
       className={cn(
         "fixed top-0 left-0 right-0 z-50 transition-all duration-300 ease-in-out",
-        scrolled 
-          ? "bg-white/90 dark:bg-gray-900/90 backdrop-blur-md shadow-md" 
+        scrolled
+          ? "bg-white/90 dark:bg-gray-900/90 backdrop-blur-md shadow-md"
           : "bg-transparent"
       )}
     >
@@ -60,8 +60,8 @@ const NavBar = () => {
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <div className="flex-shrink-0 flex items-center">
-            <Link 
-              href="/" 
+            <Link
+              href="/"
               className="text-xl font-bold text-gray-800 dark:text-white transition-colors hover:text-indigo-600 dark:hover:text-indigo-400"
             >
               True Feedback
@@ -92,9 +92,9 @@ const NavBar = () => {
                 <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
                   {session.user?.name || session.user?.email}
                 </span>
-                <Button 
-                  variant="outline" 
-                  size="sm" 
+                <Button
+                  variant="outline"
+                  size="sm"
                   onClick={() => signOut()}
                   className="flex items-center gap-1 text-red-600 dark:text-red-400 border-red-200 dark:border-red-900/50 hover:bg-red-50 dark:hover:bg-red-900/20"
                 >
@@ -145,7 +145,7 @@ const NavBar = () => {
               key={link.href}
               href={link.href}
               className={cn(
-                "block px-3 py-2 rounded-md text-base font-medium flex items-center gap-2",
+                "inline-flex px-3 py-2 rounded-md text-base font-medium items-center gap-2",
                 pathname === link.href
                   ? "text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-900/30"
                   : "text-gray-700 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400 hover:bg-gray-50 dark:hover:bg-gray-800/50"

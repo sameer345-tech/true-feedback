@@ -80,10 +80,15 @@ export async function POST(req: NextRequest) {
   } catch (error: unknown) {
     if(error instanceof Error) {
       return NextResponse.json({
+        success: false,
+        message: `Email verification failed. Error: ${error.message}`,
+        statusCode: 500
+      });
+    }
+    return NextResponse.json({
       success: false,
-      message: `Email verification failed. Error: ${error.message}`,
+      message: "Email verification failed due to an unknown error",
       statusCode: 500
     });
-    }
   }
 }

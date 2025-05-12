@@ -2,7 +2,7 @@ import { getServerSession } from "next-auth";
 import { userModel } from "@/models/user";
 import { dbConnection } from "@/lib/dbConnection";
 import { authOptions } from "../../auth/[...nextauth]/options";
-import mongoose from "mongoose";
+import { Types } from "mongoose";
 import { NextResponse } from "next/server";
 
 export async function GET() {
@@ -16,11 +16,11 @@ export async function GET() {
     }
     await dbConnection();
     try {
-     
+
      const messages = await   userModel.aggregate([
             {
                 $match: {
-                  _id: new mongoose.Types.ObjectId(session.user.id)
+                  _id: Types.ObjectId.createFromHexString(session.user.id.toString())
                 }
               },
              {$group: {
@@ -34,7 +34,7 @@ export async function GET() {
               $project: {   messages:1, isMessageAccepted:1}
             }
           ]);
-      
+
           console.log(messages)
           if(messages.length === 0) {
             return NextResponse.json({
@@ -51,8 +51,8 @@ export async function GET() {
                 statusCode: 400,
             });
         }
-    
-       
+
+
         return NextResponse.json({
             success: true,
             message: "Messages retrieved successfully",
@@ -67,5 +67,10 @@ export async function GET() {
             statusCode: 500,
         });
        }
+       return NextResponse.json({
+            success: false,
+            message: "Error during retrieving messages",
+            statusCode: 500,
+        });
     }
  }

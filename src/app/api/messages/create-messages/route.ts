@@ -41,7 +41,7 @@ export async function POST(req: NextRequest) {
 
     user.message.push(message );
     user.save()
-    
+
     return NextResponse.json({
       success: true,
       message: "Message sent successfully.",
@@ -55,5 +55,10 @@ export async function POST(req: NextRequest) {
         statusCode: 500,
       });
     }
+    return NextResponse.json({
+      success: false,
+      message: "Internal server error",
+      statusCode: 500,
+    });
   }
 }

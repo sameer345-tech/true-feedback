@@ -13,7 +13,7 @@ import  CredentialsProvider  from "next-auth/providers/credentials";
             email: { label: "Email", type: "text", placeholder: "Enter your email" },
             password: { label: "Password", type: "password" }
             },
-          async  authorize (credentials: Record<"email" | "password", string> | undefined): Promise<any> {
+          async  authorize (credentials: Record<"email" | "password", string> | undefined) {
             try {
                 if(!credentials?.email.trim() || !credentials?.password) {
                     throw new Error("Credentials are required")
@@ -23,9 +23,9 @@ import  CredentialsProvider  from "next-auth/providers/credentials";
              if(!User) {
                 throw new Error("User not found")
              }
-             
+
               const isValidPassword = await bcrypt.compare(credentials.password, User.password)
-              
+
               if(!isValidPassword) {
                 throw new Error("Password is incorrect")
               };
@@ -40,7 +40,7 @@ import  CredentialsProvider  from "next-auth/providers/credentials";
                 }
                 const expiryDate = new Date();
                 expiryDate.setMinutes(expiryDate.getMinutes() + 10);
-    
+
                 User.verifyCode = otp;
                 User.verifyCodeExpiry = expiryDate;
                 await User.save();
@@ -55,18 +55,18 @@ import  CredentialsProvider  from "next-auth/providers/credentials";
                 isMessageAccepted: User.isMessageAccepted
               }
               return user;
-                
+
             } catch (error: unknown) {
                 if(error instanceof Error) {
                     throw new Error(error.message)
                 }
-                throw new Error(error as string)
+                throw new Error(String(error))
             }
           }
         })
     ],
 
-    
+
    session: {
     strategy: "jwt",
     maxAge: 259200
@@ -80,7 +80,7 @@ import  CredentialsProvider  from "next-auth/providers/credentials";
             token.email = user.email
             token.isVerified = user.isVerified;
             token.isMessageAccepted = user.isMessageAccepted
-            
+
           }
           return token
     },
@@ -98,7 +98,7 @@ import  CredentialsProvider  from "next-auth/providers/credentials";
     }
    },
 
-    
+
    pages: {
     signIn: "/login",
     error: "/login"

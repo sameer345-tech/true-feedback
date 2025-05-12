@@ -24,22 +24,29 @@ import { ApiResponse } from '@/types/ApiResponse'
 function SendMessagePage() {
     const [isSubmiting, setIsSubmitting] = React.useState<boolean>(false);
     const {userName} = useParams();
-    const form = useForm<z.infer <typeof messageSchema>>({
-    resolver: zodResolver(messageSchema),
-    defaultValues: {
-      content: ""
-    }
-  });
-   if(!userName) {
-    toast("User name is required.", {
-      position: "top-right"
-    });
-    return;
-   }
-    const decodedUserName =  decodeURIComponent(userName.toString())
-     const DecodedUserName = decodedUserName.replace("userName:", "").trim()
 
-   
+    // Initialize form unconditionally to avoid React Hook rules violation
+    const form = useForm<z.infer <typeof messageSchema>>({
+      resolver: zodResolver(messageSchema),
+      defaultValues: {
+        content: ""
+      }
+    });
+
+    // Early return with a component instead of just returning undefined
+    if(!userName) {
+      React.useEffect(() => {
+        toast("User name is required.", {
+          position: "top-right"
+        });
+      }, []);
+      return <div>User name is required</div>;
+    }
+
+    const decodedUserName = decodeURIComponent(userName.toString());
+    const DecodedUserName = decodedUserName.replace("userName:", "").trim();
+
+
 
   const {reset} = form;
   const onSubmit = async(data: z.infer <typeof messageSchema>) => {
@@ -101,7 +108,7 @@ function SendMessagePage() {
          <div className='text-center text-2xl font-bold'>Public Profile Link</div>
           <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-       
+
         <FormField
           control={form.control}
           name="content"

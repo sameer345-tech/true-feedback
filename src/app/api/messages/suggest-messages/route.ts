@@ -29,13 +29,18 @@ export async function POST() {
     });
 
   } catch (error: unknown) {
-    console.error('OpenAI API Error:', error);
+    console.error('API Error:', error);
     if(error instanceof Error) {
+      return NextResponse.json({
+        success: false,
+        message: error.message || 'Something went wrong',
+        statusCode: 500,
+      });
+    }
     return NextResponse.json({
       success: false,
-      message: error?.message || 'Something went wrong',
+      message: 'Something went wrong',
       statusCode: 500,
     });
-    }
   }
 }

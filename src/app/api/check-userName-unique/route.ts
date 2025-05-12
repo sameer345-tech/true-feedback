@@ -1,7 +1,7 @@
 import { userModel } from "@/models/user";
 import { dbConnection } from "@/lib/dbConnection";
 import { userNameValidation } from "@/schemas/signupSchema";
-import { unknown, z } from "zod";
+import { z } from "zod";
 import { NextRequest, NextResponse } from "next/server";
 
 const userNameQuerySchema = z.object({
@@ -9,7 +9,7 @@ const userNameQuerySchema = z.object({
 })
 
 export async function GET(req:NextRequest) {
-    
+
     await dbConnection()
     try {
         const {searchParams} = new URL(req.url);
@@ -53,6 +53,11 @@ export async function GET(req:NextRequest) {
                 statusCode: 500
             })
         }
+        return NextResponse.json({
+            success: false,
+            message: "Internal server error",
+            statusCode: 500
+        })
     }
 }
 
