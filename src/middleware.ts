@@ -1,6 +1,6 @@
 import withAuth from "next-auth/middleware";
 
-const allowedRoutes = ["/", "/sign-in", "/sign-up", "/verification", "/api-docs"]
+const allowedRoutes = ["/", "/sign-in", "/sign-up", "/verification", "/api-docs", "/send-message/:path*"];
  export default withAuth(
     function middleware(req) {
         console.log(req.nextauth.token)
@@ -19,5 +19,5 @@ const allowedRoutes = ["/", "/sign-in", "/sign-up", "/verification", "/api-docs"
 )
 
  export const config = {
-    matcher: ["/sign-in", "/sign-up", "/dashboard/:path*", "/", "/verification/:path*", "/api-docs", "/create-message", "/view-messages"]
+    matcher: ["/sign-in", "/sign-up", "/dashboard/:path*", "/", "/verification/:path*", "/api-docs", "/send-message/:path*"],
 }
