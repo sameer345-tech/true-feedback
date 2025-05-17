@@ -7,7 +7,7 @@ export async  function sendEmailVerification  (email: string, userName: string, 
        const emailSent =  await resend.emails.send({
             from: 'verification@sameer-dev.online',
             to: email,
-            subject: ' Mystery Message verification code ',
+            subject: ' True Feedback verification code ',
             react: EmailTemplate({ userName, email, otp }),
           });
           if(!emailSent?.data?.id) {
