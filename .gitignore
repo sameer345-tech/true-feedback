@@ -29,6 +29,7 @@ yarn-error.log*
 
 # Ignore environment files (can be committed if needed)
 .env*
+.env*.local
 
 # Ignore Vercel deployment files
 .vercel

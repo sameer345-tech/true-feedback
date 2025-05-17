@@ -95,7 +95,7 @@ function SendMessagePage() {
       }
 
       setSuggestions(response.data.suggestions || []);
-      toast.success("Suggestions generated.", {
+      toast.success(response.data.message, {
         position: "top-right"
       });
       
@@ -109,7 +109,7 @@ function SendMessagePage() {
     }
   }
 
-  const useSuggestion = (suggestion: string) => {
+  const UseSuggestion = (suggestion: string) => {
     form.setValue("content", suggestion);
   };
 
@@ -209,7 +209,7 @@ function SendMessagePage() {
                 key={index}
                 className={`bg-gray-50 dark:bg-gray-800 p-4 rounded-lg border border-gray-200 dark:border-gray-700 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 transition-all animate-slide-up`}
                 style={{ animationDelay: `${index * 150}ms` }}
-                onClick={() => useSuggestion(suggestion)}
+                onClick={() => UseSuggestion(suggestion)}
               >
                 <p className="text-gray-800 dark:text-gray-200">{suggestion}</p>
               </div>

@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import Groq from 'groq-sdk';
-
+import { GroqError } from 'groq-sdk';
 const groq = new Groq({
   apiKey: process.env.GROQ_API_KEY!, // Always use env variable in production
 });
@@ -29,11 +29,18 @@ export async function GET() {
       message: 'Ideas generated successfully.',
       suggestions,
     });
-  } catch (error: any) {
-    console.error("Groq error:", error.message);
+  } catch (error: unknown) {
+    if(error instanceof GroqError) {
+      return NextResponse.json({
+        success: false,
+        message: `Error during generating suggestions: ${error.message}`,
+        statusCode: 500,
+      });
+    }
     return NextResponse.json({
       success: false,
-      message: 'Failed to fetch suggestions',
-    }, { status: 500 });
+      message: "Error during generating suggestions",
+      statusCode: 500,
+    });
   }
 }

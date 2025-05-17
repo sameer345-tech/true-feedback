@@ -11,15 +11,16 @@ import  CredentialsProvider  from "next-auth/providers/credentials";
             name: "credentials",
             credentials: {
             email: { label: "Email", type: "text", placeholder: "Enter your email" },
-            password: { label: "Password", type: "password" }
+            password: { label: "Password", type: "password" },
+            userName: { label: "User name", type: "text", placeholder: "Enter your user name" }
             },
-          async  authorize (credentials: Record<"email" | "password", string> | undefined) {
+          async  authorize (credentials: Record<"email" | "password" | "userName", string> | undefined) {
             try {
-                if(!credentials?.email.trim() || !credentials?.password) {
+                if(!credentials?.email.trim() || !credentials?.password || !credentials?.userName) {
                     throw new Error("Credentials are required")
                 }
              await   dbConnection()
-             const User = await userModel.findOne({email: credentials?.email});
+             const User = await userModel.findOne({email: credentials?.email , userName: credentials?.userName});
              if(!User) {
                 throw new Error("User not found")
              }

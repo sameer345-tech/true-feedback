@@ -4,7 +4,7 @@ import React, { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { signinSchema } from '@/schemas/signinSchema'
 import { useForm } from 'react-hook-form'
-import { Loader2, Mail, Lock, ArrowRight } from 'lucide-react'
+import { Loader2, Mail, Lock, ArrowRight, User } from 'lucide-react'
 import { zodResolver } from '@hookform/resolvers/zod'
 import z from "zod"
 import { toast } from 'sonner'
@@ -23,6 +23,7 @@ function SignInPage() {
   const form = useForm<z.infer<typeof signinSchema>>({
     resolver: zodResolver(signinSchema),
     defaultValues: {
+      userName: "",
       email: "",
       password: ""
     }
@@ -34,17 +35,27 @@ function SignInPage() {
       const response = await signIn("credentials", {
         email: data.email,
         password: data.password,
+        userName: data.userName,
         redirect: false
       })
+
       if (!response?.ok) {
         const error = response?.error?.replace("Error: ", "");
         toast.error(error, {
           position: "top-right"
         })
-        setIsSignin(false);
-        return
-      }
+        if(error === "Verification code sent to your email check your inbox.")
+        {
+          toast.success(error, {
+          position: "top-right"
+        })
+        router.push(`/verification/${data.userName}`)
 
+        }
+        setIsSignin(false);
+        return;
+      }
+  
       setIsSignin(false);
       toast.success("Sign in successful", {
         position: "top-right",
@@ -108,12 +119,35 @@ function SignInPage() {
 
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-5">
+            <FormField
+                control={form.control}
+                name="userName"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className="text-gray-700 dark:text-gray-300">User name:</FormLabel>
+                    <div className="relative">
+                      <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                        <User className="h-5 w-5 text-gray-400" />
+                      </div>
+                      <FormControl>
+                        <Input
+                          placeholder="Enter your User name."
+                          {...field}
+                          className="pl-10 bg-gray-50 dark:bg-gray-800 border-gray-300 dark:border-gray-700"
+                        />
+                      </FormControl>
+                    </div>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
               <FormField
                 control={form.control}
                 name="email"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="text-gray-700 dark:text-gray-300">Email</FormLabel>
+                    <FormLabel className="text-gray-700 dark:text-gray-300">Email:</FormLabel>
                     <div className="relative">
                       <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                         <Mail className="h-5 w-5 text-gray-400" />
@@ -137,7 +171,7 @@ function SignInPage() {
                 render={({ field }) => (
                   <FormItem>
                     <div className="flex justify-between items-center">
-                      <FormLabel className="text-gray-700 dark:text-gray-300">Password</FormLabel>
+                      <FormLabel className="text-gray-700 dark:text-gray-300">Password:</FormLabel>
                       <Link href="/forgot-password" className="text-xs text-indigo-600 hover:text-indigo-500 dark:text-indigo-400">
                         Forgot password?
                       </Link>

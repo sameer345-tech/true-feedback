@@ -81,7 +81,7 @@ function SignUpPage() {
             position: "top-right",
           });
         }
-        return
+        return;
       }
       toast.success(response.data.message, {
         position: "top-right"

@@ -32,22 +32,24 @@ function VerificationPage() {
         verifyCode: data.verifyCode
       })
       if(!response.data?.success) {
-        toast(response.data?.message,{
+        toast.error(response.data?.message,{
           position: "top-right"
         })
+        setIsVerifying(false);
+        return;
       }
-      toast(response.data.message, {
+      toast.success(response.data.message, {
         position: "top-right",
         duration: 3000
       })
 
       setIsVerifying(false);
-      router.replace("/login")
+      router.replace("/sign-in")
       
        } catch (error) {
         console.log(error);
        const axiousError = error as  AxiosError <ApiResponse>;
-       toast(axiousError.response?.data.message || "something went wron.g", {
+       toast.error(axiousError.response?.data.message || "something went wron.g", {
          position: "top-right"
        })
        }

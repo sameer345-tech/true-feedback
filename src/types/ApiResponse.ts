@@ -5,5 +5,6 @@ export interface ApiResponse{
     message: string,
     messages?: messageI[],
     isMessageAccepted?: boolean,
+    statusCode?: number
 
 }

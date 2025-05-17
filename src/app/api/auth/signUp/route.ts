@@ -19,7 +19,7 @@ export async function POST(req: NextRequest) {
             isverified: true} );
 
         if (existingUserVerified) {
-            return NextResponse.json({ success: false, message: "User already registered with this email address or user name." });
+            return NextResponse.json({ success: false, message: "User already registered with this email address or user name.", statusCode: 400 });
         }
 
         const existingUnverified = await userModel.findOne({ userName, email, isverified: false });
