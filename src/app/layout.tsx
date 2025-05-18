@@ -7,6 +7,7 @@ import { SessionProvider } from "next-auth/react";
 import { Toaster } from "@/components/ui/sonner"
 import NavBar from "@/components/NavBar";
 import Footer from "@/components/Footer";
+import { Analytics } from '@vercel/analytics/next';
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -31,6 +32,7 @@ export default function RootLayout({
         <SessionProvider>
           <NavBar />
           {children}
+          <Analytics />
           <Footer />
           <Toaster />
         </SessionProvider>

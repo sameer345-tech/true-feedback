@@ -116,7 +116,7 @@ function DashboardPage() {
   const {name} = session.user as User;
 
   const baseUrl = `${window.location.protocol}//${window.location.host}`;
-  const profileUrl = `${baseUrl}/user/${name}`
+  const profileUrl = `${baseUrl}/send-message/${name}`
 
   const copyToClipboard = () => {
     navigator.clipboard.writeText(profileUrl);
